@@ -27,9 +27,9 @@ private class WormView(ctx:android.content.Context,val report:(Int,Int,Boolean)-
  val p=Paint(3);val h=android.os.Handler(android.os.Looper.getMainLooper());val foods=mutableListOf<Dot>();val worm=mutableListOf<Seg>();val enemies=mutableListOf<MutableList<Seg>>()
  var angle=0.0;var target=0.0;var score=0;var alive=false;var ended=false;var last=0L;var tx=0f;var ty=0f
  val colors=intArrayOf(Color.RED,Color.YELLOW,Color.MAGENTA,Color.CYAN,Color.rgb(255,130,20))
- val loop=object:Runnable{override fun run(){if(!alive)return;val now=android.os.SystemClock.uptimeMillis();val dt=if(last==0L).03f else ((now-last).coerceAtMost(40L)/1000f)
+ val loop=object:Runnable{override fun run(){if(!alive)return;val now=android.os.SystemClock.uptimeMillis();val dt=if(last==0L) 0.03f else ((now-last).coerceAtMost(40L)/1000f)
  last=now
- var d=((target-angle+Math.PI*3)%(Math.PI*2))-Math.PI;angle+=d.coerceIn(-2.4*dt,2.4*dt)
+ var d=((target-angle+Math.PI*3)%(Math.PI*2))-Math.PI;angle+=d.coerceIn(-2.4*dt.toDouble(),2.4*dt.toDouble())
  val a=worm[0];val nx=a.x+kotlin.math.cos(angle).toFloat()*140*dt;val ny=a.y+kotlin.math.sin(angle).toFloat()*140*dt
  if(nx<30||ny<30||nx>970||ny>1370){alive=false;ended=true;report(score,worm.size,true);invalidate();return}
  worm.add(0,Seg(nx,ny));worm.removeAt(worm.lastIndex)
