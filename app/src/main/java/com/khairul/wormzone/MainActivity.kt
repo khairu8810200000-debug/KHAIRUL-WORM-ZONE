@@ -16,8 +16,8 @@ class MainActivity: Activity(){
  val game=WormView(this){s,n,over->runOnUiThread{score.text="SKOR: $s   PANJANG: $n";if(over)msg.text="TAMAT! Tekan MAIN SEMULA"}}
  root.addView(game,LinearLayout.LayoutParams(-1,0,1f))
  val btn=Button(this);btn.text="MULA BERMAIN";btn.setOnClickListener{game.start();msg.text="Leret skrin untuk mengemudi"};root.addView(btn,LinearLayout.LayoutParams(-1,52))
- val adbox=FrameLayout(this);root.addView(adbox,LinearLayout.LayoutParams(-1,50));setContentView(root)
- MobileAds.initialize(this){runOnUiThread{val ad=AdView(this);ad.adUnitId="ca-app-pub-3940256099942544/6300978111";ad.setAdSize(AdSize.BANNER);adbox.addView(ad,FrameLayout.LayoutParams(-1,-2,Gravity.CENTER));ad.loadAd(AdRequest.Builder().build())}}
+ val adbox=FrameLayout(this);root.addView(adbox,LinearLayout.LayoutParams(-1,LinearLayout.LayoutParams.WRAP_CONTENT));setContentView(root)
+ MobileAds.initialize(this){runOnUiThread{val ad=AdView(this);ad.adUnitId=getString(R.string.admob_banner_ad_unit_id);ad.setAdSize(AdSize.BANNER);adbox.addView(ad,FrameLayout.LayoutParams(-1,-2,Gravity.CENTER));ad.loadAd(AdRequest.Builder().build())}}
  }
  override fun onPause(){super.onPause()}
 }
